@@ -1,0 +1,30 @@
+name: Auto Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  create_release:
+    name: Release Automática
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Gerar a Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "🌐 Matrix-Link: ${{ github.ref_name }}"
+          body: |
+            ## 🖥️ Resumo das alterações no Matrix-Link:
+            *(Cole a sua descrição detalhada aqui antes de publicar)*
+            
+          generate_release_notes: true
+          draft: true
+          prerelease: false
